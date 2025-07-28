@@ -1,98 +1,108 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# The Games Board - Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A NestJS API connected to a PostgreSQL database, with endpoints to get, create, update, and delete blog posts.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Live Demo
 
-## Description
+https://natmonlee.github.io/the-games-board/
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The frontend is hosted on GitHub Pages and communicates with a backend hosted on an AWS EC2 instance using a PostgreSQL database.
 
-## Project setup
+## Tech Stack
 
-```bash
-$ npm install
-```
+- NestJS
+- TypeScript
+- PostgreSQL
+- TypeORM
+- Axios
 
-## Compile and run the project
+## Environment Variables
+
+To run this project, create a `.env` file in the root of the project and add the following variables, you can change them to match your setup:
+
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=your_password
+DB_NAME=postgres
+## Install and Run Locally
+
+Download files and unzip or clone with command below
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+  git clone https://github.com/Natmonlee/the-games-board-api.git
 ```
 
-## Run tests
+Go to the project directory
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+  cd the-games-board-api
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Install dependencies
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+  npm install
+```
+Run database migrations (after ensuring PostgreSQL is running)
+
+```bash
+  npm run migration:run
+```
+Start the server 
+
+```bash
+  npm run start
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+IMPORTANT: If your backend runs on a port other than 3000, update the URL in the frontend at:
+the-games-board/src/utils/getBackendUrl.ts
 
-## Resources
+## API Reference
 
-Check out a few resources that may come in handy when working with NestJS:
+CreatePostDto {
+  author: string;    // max length: 30
+  tagline: string;   // max length: 100
+  content: string;
+}
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+UpdatePostDto {
+  author?: string;    // max length: 30
+  tagline?: string;   // max length: 100
+  content?: string;
+}
 
-## Support
+HTTP Endpoints:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+GET /post
+Get all posts
 
-## Stay in touch
+GET /post/:id
+Get a single post by ID
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+POST /post
+Create a new post
+@Body() createPostDto: CreatePostDto
 
-## License
+PATCH /post/:id
+Update an existing post
+@Body() updatePostDto: UpdatePostDto
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+DELETE /post/:id
+Delete a post
+
+## Potential Improvements
+
+- Return clearer responses from the API (e.g. “Post created successfully”) to improve frontend handling.
+- Implement more robust testing. I followed tutorials to get started and included basic tests using Jest, but found testing more challenging in the NestJS framework.
+- Add security features such as rate limiting and user authentication. The brief specified public access, so I kept it open intentionally.
+- For a production-ready API, I would include pagination to prevent performance issues from loading large datasets and API keys to prevent misuse.
+
+## Reflections
+
+- Working with PostgreSQL locally and on an EC2 instance was the biggest learning curve. I had only used hosted databases before, so setting one up from scratch — including migrations — was a real challenge.
+- Configuring PostgreSQL on EC2 required editing config files to gain access. This took a lot of trial and error.
+- I found TypeORM very useful, especially features like automatic timestamp columns.
+- Using NestJS was a big improvement over Express (which I was more familiar with). The structure and decorators made it faster to build.
+
