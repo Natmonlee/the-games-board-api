@@ -4,9 +4,9 @@ A NestJS API connected to a PostgreSQL database, with endpoints to get, create, 
 
 ## Live Demo
 
-https://natmonlee.github.io/the-games-board/
+https://the-games-board.vercel.app/
 
-The frontend is hosted on GitHub Pages and communicates with a backend hosted on an AWS EC2 instance using a PostgreSQL database.
+The frontend is hosted on Vercel and communicates with a backend hosted on an AWS EC2 instance using a PostgreSQL database.
 
 ## Tech Stack
 

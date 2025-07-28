@@ -6,8 +6,8 @@ async function bootstrap(): Promise<void> {
 
   app.enableCors({
     origin: [
-      'http://localhost:5173',
-      'https://natmonlee.github.io/the-games-board',
+      /^(http:\/\/localhost:\d+)$/,
+      'https://the-games-board.vercel.app/',
     ],
   });
 
