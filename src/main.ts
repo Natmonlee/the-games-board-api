@@ -6,6 +6,10 @@ async function bootstrap(): Promise<void> {
 
   app.enableCors({
     origin: [/^(http:\/\/localhost:\d+)$/, 'http://51.21.202.149'],
+    credentials: true,
+    allowedHeaders:
+      'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+    methods: 'GET, POST, PATCH, DELETE',
   });
 
   await app.listen(process.env.PORT || 3000, '0.0.0.0');
