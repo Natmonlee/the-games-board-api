@@ -2,12 +2,43 @@
 
 A NestJS API connected to a PostgreSQL database, with endpoints to get, create, update, and delete blog posts.
 
-## Live Demo
+# Live Demo
 
-http://51.21.202.149/
+I intended to have a complete live demo hosted, but unfortunately ran into some CORS issues that I wasn’t able to fully resolve in time.
 
-The frontend is hosted on Vercel and communicates with a backend hosted on an AWS EC2 instance using a PostgreSQL database.
+The API is running on an AWS EC2 instance. While it works locally with the expected Access-Control-Allow-Origin headers, for some reason these headers seem to be stripped when deployed — possibly due to some NestJS-specific behavior or server configuration.
 
+As a result, it currently can’t be used directly from the browser. However, it can still be tested using curl, Postman, or similar tools.
+
+GET all posts:
+
+```bash
+curl -X GET http://51.21.202.149:3000/post/
+```
+GET a single post by ID:
+
+```bash
+curl -X GET http://51.21.202.149:3000/post/${id}$
+```
+POST a new post:
+
+```bash
+curl -X POST http://51.21.202.149:3000/post/ \
+    -H "Content-Type: application/json" \
+    -d '{"author": "Example", "tagline": "Example", "content": "Example"}'
+```
+PATCH an existing post:
+
+```bash
+curl -X PATCH http://51.21.202.149:3000/post/${id} \
+    -H "Content-Type: application/json" \
+    -d '{"author": "Updated Author", "tagline": "Updated Tagline", "content": "Udated Content"}'
+```
+DELETE a post:
+
+```bash
+curl -X DELETE http://51.21.202.149:3000/post/${id}
+```
 ## Tech Stack
 
 - NestJS
@@ -98,6 +129,7 @@ Delete a post
 - Implement more robust testing. I followed tutorials to get started and included basic tests using Jest, but found testing more challenging in the NestJS framework.
 - Add security features such as rate limiting and user authentication. The brief specified public access, so I kept it open intentionally.
 - For a production-ready API, I would include pagination to prevent performance issues from loading large datasets and API keys to prevent misuse.
+- Dockerize the app for easier deployment.
 
 ## Reflections
 
@@ -105,4 +137,5 @@ Delete a post
 - Configuring PostgreSQL on EC2 required editing config files to gain access. This took a lot of trial and error.
 - I found TypeORM very useful, especially features like automatic timestamp columns.
 - Using NestJS was a big improvement over Express (which I was more familiar with). The structure and decorators made it faster to build.
+- I intended to host the backend and frontend 
 

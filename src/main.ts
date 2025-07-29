@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
+  console.log('starting app');
 
   app.enableCors({
     origin: [/^(http:\/\/localhost:\d+)$/, 'http://51.21.202.149'],
